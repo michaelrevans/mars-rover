@@ -7,5 +7,5 @@ Plateau.start(1,2,"N")
 Plateau.move_rover("LMLMLMLMM")
 
 Plateau.init(5,5)
-Plateau.start(2,2,"E")
+Plateau.start(3,3,"E")
 Plateau.move_rover("MMRMMRMRRM")

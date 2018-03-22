@@ -11,8 +11,9 @@ class Rover
     private
 
     def move_forwards
-      x_movement = (Orientation.current_orientation unless Orientation.current_orientation % 2 == 0) || 0
-      y_movement = (1 - Orientation.current_orientation unless Orientation.current_orientation + 1 % 2 == 0) || 0
+      curr_ori = Orientation.standardised_current
+      x_movement = curr_ori % 2 == 0 ? 0 : curr_ori
+      y_movement = curr_ori % 2 == 1 ? 0 : 1 - curr_ori
       Position.update(x_movement, y_movement)
     end
 

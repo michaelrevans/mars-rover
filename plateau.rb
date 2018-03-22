@@ -2,10 +2,6 @@ class Plateau
 
   class << self
 
-    def hello
-      puts "Hello"
-    end
-
     def init(breadth, length)
       @breadth = breadth
       @length = length
@@ -19,8 +15,18 @@ class Plateau
     def move_rover(command_series)
       command_series.chars.each do |command|
         Rover.execute_command(command)
+        confine
+        print Position.result, " "
+        print Orientation.result, "\n"
       end
-      puts Position.current
+      puts Position.result
+      puts Orientation.result
+    end
+
+    private
+
+    def confine
+      Position.moderate(@breadth, @length)
     end
 
   end

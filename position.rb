@@ -18,6 +18,15 @@ class Position
       @@y_position += y_movement
     end
 
+    def moderate(breadth, length)
+      @@x_position = [[breadth, @@x_position].min, 0].max
+      @@y_position = [[length, @@y_position].min, 0].max
+    end
+
+    def result
+      current
+    end
+
   end
 
 end

@@ -2,12 +2,16 @@ class Orientation
 
   class << self
 
-    def current_orientation=(orientation)
-      @@current_orientation = orientation
+    def current=(orientation)
+      @@current = orientation
     end
 
-    def current_orientation
-      @@current_orientation
+    def current
+      @@current
+    end
+
+    def standardised_current
+      standardise @@current
     end
 
     def init(orientation)
@@ -15,11 +19,15 @@ class Orientation
       if !orientation.is_a? Numeric
         orientation = convert_to_integer(orientation)
       end
-      @@current_orientation = orientation
+      @@current = orientation
+    end
+
+    def result
+      convert_to_letter @@current
     end
 
     def update(direction)
-      @@current_orientation += direction
+      @@current = standardise(@@current + direction)
     end
 
     private
@@ -29,13 +37,14 @@ class Orientation
       standardise(@@all_orientations.index(orientation))
     end
 
-    def convert_to_letter
+    def convert_to_letter(orientation)
       return orientation if orientation.is_a? String
       @@all_orientations[orientation]
     end
 
     def standardise(integral_orientation)
-      (integral_orientation + 1) % @@all_orientations.length - 1
+      # retains orientation in [-1..2]
+      (integral_orientation + 1) % (@@all_orientations.length) - 1
     end
 
     def all_orientations
